@@ -44,7 +44,7 @@ class SignUp extends Component {
     render() {
         const { phone, verificationCode } = this.state
         return (
-            <form className="form-horizontal" onSubmit={this.onSubmit}>
+            <div className="form-horizontal">
                 <InputField
                     type="text"
                     name="phone"
@@ -60,9 +60,9 @@ class SignUp extends Component {
                     onChange={this.onChange}
                  />
                  <div className="from-group col-md-offset-4">
-                    <button type="submit" className="btn btn-primary btn-lg">提交</button>
+                    <button type="submit" className="btn btn-primary btn-lg" onClick={this.onSubmit}>提交</button>
                  </div>
-            </form>
+            </div>
         )
     }
 }

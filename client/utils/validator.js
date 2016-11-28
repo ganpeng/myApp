@@ -3,12 +3,12 @@ import is from 'is_js'
 
 export function SignUpValidator(data) {
     let errors = {}
-
+    console.log('hahaha')
     if (is.empty(data.phone)) {
         errors.phone = '手机号不能为空'
     } 
 
-    if (!is.number(parseInt(data.phone))) {
+    if (!is.empty(data.phone) && !is.number(parseInt(data.phone))) {
         errors.phone = '手机号格式不正确'
     }
 
@@ -16,7 +16,7 @@ export function SignUpValidator(data) {
         errors.verificationCode = '验证码不能为空'
     }
 
-    if (!is.number(parseInt(data.verificationCode))) {
+    if (!is.empty(data.verificationCode) && !is.number(parseInt(data.verificationCode))) {
         errors.verificationCode = '验证码只能是数字'
     }
 

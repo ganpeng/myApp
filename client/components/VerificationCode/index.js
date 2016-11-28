@@ -15,6 +15,7 @@ class VerificationCode extends Component {
     }
 
     onClick(e) {
+        e.preventDefault()
         const { isCountDownIng } = this.state
         if (isCountDownIng) {
             return false
@@ -59,7 +60,7 @@ class VerificationCode extends Component {
                     />
                 </div>
                 <div className="col-md-2">
-                    <button disabled={this.state.isCountDownIng}  className="btn btn-primary" onClick={this.onClick}>
+                    <button disabled={this.state.isCountDownIng}  type="button" className="btn btn-primary" onClick={this.onClick}>
                         {
                             this.state.isCountDownIng ? `倒计时${this.state.totalCount}` : '获取验证码'
                         }
