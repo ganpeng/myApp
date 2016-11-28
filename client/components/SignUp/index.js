@@ -4,6 +4,8 @@ import React, { Component } from 'react'
 
 import InputField from '../InputField'
 import VerificationCode from '../VerificationCode'
+import { SignUpValidator } from '../../utils/validator'
+
 
 class SignUp extends Component {
 
@@ -27,6 +29,16 @@ class SignUp extends Component {
 
     onSubmit(e) {
         e.preventDefault()
+        const { errors, isValid } = SignUpValidator(this.state)
+
+        if (isValid) {
+            console.log('success')
+        } else {
+            console.log({
+                errors,
+                isValid
+            })
+        }
     }
 
     render() {
