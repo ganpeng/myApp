@@ -1,10 +1,12 @@
 'use strict'
 
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import InputField from '../InputField'
 import VerificationCode from '../VerificationCode'
 import { SignUpValidator } from '../../utils/validator'
+import { getVerificationCode } from '../../actions/auth'
 
 
 class SignUp extends Component {
@@ -13,7 +15,9 @@ class SignUp extends Component {
         super(props)
         this.state = {
             phone : '',
-            verificationCode : ''
+            verificationCode : '',
+            errors : {},
+            isValid : false
         }
 
         this.onChange = this.onChange.bind(this)
@@ -31,10 +35,14 @@ class SignUp extends Component {
         e.preventDefault()
         const { errors, isValid } = SignUpValidator(this.state)
 
+
         if (isValid) {
-            console.log('success')
+            this.setState({
+                errors: {},
+                isValid : true
+            })
         } else {
-            console.log({
+            this.setState({
                 errors,
                 isValid
             })
@@ -42,7 +50,8 @@ class SignUp extends Component {
     }
 
     render() {
-        const { phone, verificationCode } = this.state
+        const { phone, verificationCode, isValid, errors } = this.state
+        const { getVerificationCode } = this.props
         return (
             <div className="form-horizontal">
                 <InputField
@@ -50,6 +59,7 @@ class SignUp extends Component {
                     name="phone"
                     placeholder="请输入手机号" 
                     value={phone}
+                    error={errors.phone}
                     onChange={this.onChange}
                  /> 
                  <VerificationCode
@@ -57,10 +67,13 @@ class SignUp extends Component {
                     name="verificationCode"
                     placeholder="请输入验证码"
                     value={verificationCode}
+                    error={errors.verificationCode}
                     onChange={this.onChange}
+                    getVerificationCode={getVerificationCode}
+                    phone={phone}
                  />
                  <div className="from-group col-md-offset-4">
-                    <button type="submit" className="btn btn-primary btn-lg" onClick={this.onSubmit}>提交</button>
+                    <button  type="submit" className="btn btn-primary btn-lg" onClick={this.onSubmit}>提交</button>
                  </div>
             </div>
         )
@@ -68,4 +81,4 @@ class SignUp extends Component {
 }
 
 
-export default SignUp
+export default connect(null, {getVerificationCode})(SignUp)

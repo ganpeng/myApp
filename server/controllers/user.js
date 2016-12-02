@@ -2,6 +2,8 @@
 
 import co from 'co'
 
+import db from '../models'
+
 
 export function getUser(req, res) {
     console.log(req.body)
@@ -10,7 +12,6 @@ export function getUser(req, res) {
 
 export function createUser(req, res) {
     console.log(req.body)
-    res.send(req.body)
 }
 
 

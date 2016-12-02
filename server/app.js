@@ -19,7 +19,7 @@ const app = express()
 
 
 app.use(webpackDevMiddleware(compiler, {
-    noInfo : false,
+    noInfo : true,
     publicPath : webpackConfig.output.publicPath
 }))
 app.use(webpackHotMiddleware(compiler))

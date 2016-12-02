@@ -1,6 +1,7 @@
 'use strict'
 
 import React, { Component } from 'react'
+import classnames from 'classnames'
 
 import InputField from '../InputField'
 
@@ -17,10 +18,12 @@ class VerificationCode extends Component {
     onClick(e) {
         e.preventDefault()
         const { isCountDownIng } = this.state
+        const phone = this.props.phone
         if (isCountDownIng) {
             return false
         }
         this.rendCountDown()
+        this.props.getVerificationCode({phone})
     }
 
     rendCountDown() {
@@ -43,11 +46,11 @@ class VerificationCode extends Component {
 
 
     render() {
-        const { type, placeholder, value, onChange, name } = this.props
+        const { type, placeholder, value, onChange, name, error } = this.props
         return (
-            <div className="form-group">
+            <div className={ classnames("form-group", { "has-error" : error }) }>
                 <label className="control-label col-offset-md-4 col-md-4">
-                    手机号:
+                    验证码: 
                 </label>
                 <div className="col-md-2">
                     <input 
@@ -58,6 +61,7 @@ class VerificationCode extends Component {
                         value={value}
                         onChange={onChange}
                     />
+                    {error && <span className="help-block">{error}</span> }
                 </div>
                 <div className="col-md-2">
                     <button disabled={this.state.isCountDownIng}  type="button" className="btn btn-primary" onClick={this.onClick}>

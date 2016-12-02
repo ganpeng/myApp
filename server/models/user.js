@@ -5,12 +5,13 @@ export default (sequelize, DataTypes) => {
     const User = sequelize.define('User', {
         username : {
             type : DataTypes.STRING,
-            allowNull : false
+            // allowNull : false
+            unique : true
         },
 
         nickName : {
-            type : DataTypes.STRING,
-            allowNull : false
+            type : DataTypes.STRING
+            // allowNull : false
         },
 
         gender : {
@@ -23,7 +24,8 @@ export default (sequelize, DataTypes) => {
         },
 
         phone : {
-            type : DataTypes.STRING
+            type : DataTypes.STRING,
+            allowNull : false
         },
 
         birthday : {
@@ -33,6 +35,15 @@ export default (sequelize, DataTypes) => {
         isguy : {
             type : DataTypes.BOOLEAN,
             defaultValue : false
+        },
+
+        isRegister : {
+            type : DataTypes.BOOLEAN,
+            defaultValue : false
+        },
+
+        verifiCode : {
+            type : DataTypes.TEXT
         }
     }, {
         timestamps : true,
