@@ -5,10 +5,13 @@ export default (sequelize, DataTypes) => {
     const User = sequelize.define('User', {
         username : {
             type : DataTypes.STRING,
-            // allowNull : false
+            allowNull : false
             unique : true
         },
-
+        password_digist : {
+            type : DataTypes.STRING,
+            allowNull:false
+        },
         nickName : {
             type : DataTypes.STRING
             // allowNull : false
@@ -20,12 +23,13 @@ export default (sequelize, DataTypes) => {
         },
 
         email : {
-            type : DataTypes.STRING
+            type : DataTypes.STRING,
+            allowNull : false
         },
 
         phone : {
             type : DataTypes.STRING,
-            allowNull : false
+            // allowNull : false
         },
 
         birthday : {
