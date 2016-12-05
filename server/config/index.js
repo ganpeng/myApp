@@ -5,7 +5,8 @@ export default {
         database : 'postgres',
         username : 'postgres',
         password : 'gs880101',
-        host : '192.168.1.164',
+        // host : '192.168.1.164',
+        host : 'localhost',
         dialect : 'postgres',
         pool : {
             max : 5,
@@ -18,7 +19,8 @@ export default {
         database : 'postgres',
         username : 'postgres',
         password : 'gs880101',
-        host : '192.168.1.164',
+        // host : '192.168.1.164',
+        host : 'localhost',
         dialect : 'postgres',
         pool : {
             max : 5,
@@ -31,7 +33,8 @@ export default {
         database : 'postgres',
         username : 'postgres',
         password : 'gs880101',
-        host : '192.168.1.164',
+        // host : '192.168.1.164',
+        host : 'localhost',
         dialect : 'postgres',
         pool : {
             max : 5,
