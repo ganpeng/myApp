@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/ganpeng/myApp#readme",
   "dependencies": {
+    "antd": "^2.5.1",
     "axios": "^0.15.3",
     "bcryptjs": "^2.3.0",
     "bluebird": "^3.4.6",
