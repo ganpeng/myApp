@@ -1,6 +1,7 @@
 'use strict'
 
 import co from 'co'
+import jwt from 'jsonwebtoken'
 
 import db from '../models'
 import { _genSalt, _hash } from '../utils/hashPassword'
@@ -30,7 +31,14 @@ export function createUser(req, res) {
         const salt = yield _genSalt(10)
         const password_digist = yield _hash(password, salt)
 
-        yield db.User.create({username, email, password_digist})
+        const user = yield db.User.create({username, email, password_digist})
+
+        console.log(user.get('id'))
+        console.log(user.get('username'))
+        console.log(user.get('email'))
+
+        // const token = jwt.sign({
+        // }, 'jsonwebtokensecret')
 
         return res.json({
             success: true
