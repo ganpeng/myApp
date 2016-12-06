@@ -34,3 +34,21 @@ export function signUpValidator(data) {
         isValid : is.empty(errors)
     }
 }
+
+
+export function loginValidator(userData) {
+    let errors = {}
+
+    if (is.empty(userData.identify)) {
+        errors.identify = '用户名/邮箱不能为空'
+    }
+
+    if (is.empty(userData.password)) {
+        errors.password = '用户密码不能为空'
+    }
+
+    return {
+        errors,
+        isValid : is.empty(errors)
+    }
+}

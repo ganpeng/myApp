@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import InputField from '../InputField'
+import { loginValidator } from '../../utils/validator'
 
 class LoginForm extends Component {
     constructor(props) {
@@ -15,6 +16,17 @@ class LoginForm extends Component {
         this.onClick = this.onClick.bind(this)
     }
 
+    isValid() {
+        const { errors, isValid } = loginValidator(this.state)
+
+        if (!isValid) {
+            this.setState({
+                errors
+            })
+        }
+
+        return isValid
+    }
 
     onChange(e) {
         this.setState({
@@ -22,8 +34,14 @@ class LoginForm extends Component {
         })
     }
 
-    onClick(e) {
-        console.log('hehe')
+    onClick() {
+        this.setState({errors : {}})
+        if (this.isValid()) {
+            console.log('success')
+        } else {
+            console.log('failure')
+        }
+
     }
 
 
