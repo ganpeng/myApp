@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import classnames from 'classnames'
 
 class InputField extends Component {
 
     render() {
         const { label, type, name, value, error, onChange, placeholder } = this.props
         return (
-            <div className="form-group">
+            <div className={classnames("form-group", { "has-error" : error})}>
                 <label className="control-label">
                     {label}
                 </label> 
@@ -17,6 +18,7 @@ class InputField extends Component {
                     onChange={onChange}
                     placeholder={placeholder}
                 />
+                {error && <span className="help-block">{error}</span>}
             </div>
         )
     }

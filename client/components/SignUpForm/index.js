@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import InputField from '../InputField'
+import { signUpValidator } from '../../utils/validator'
 
 class SignUpForm extends Component {
     constructor(props) {
@@ -17,6 +18,16 @@ class SignUpForm extends Component {
         this.onClick = this.onClick.bind(this)
     }
 
+    isValid() {
+        const { errors, isValid } = signUpValidator(this.state)
+
+        this.setState({
+            errors: errors
+        })
+
+        return isValid
+    }
+
     onChange(e) {
         this.setState({
             [e.target.name] : e.target.value
@@ -24,7 +35,13 @@ class SignUpForm extends Component {
     }
 
     onClick() {
-        console.log(this.state)
+        this.setState({ errors : {} })
+        console.log(this.isValid())
+        if (this.isValid()) {
+            console.log('good')
+        } else {
+            console.log('oh no!!!')
+        }
     }
 
     render() {
