@@ -6,5 +6,6 @@ import movie from './movie'
 export default (app) => {
 
     app.use('/api/movie', movie)
+    app.use('/api/user', user)
     
 }

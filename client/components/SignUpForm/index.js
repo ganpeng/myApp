@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import InputField from '../InputField'
 import { signUpValidator } from '../../utils/validator'
+import { signUp } from '../../actions/user'
 
 class SignUpForm extends Component {
     constructor(props) {
@@ -11,7 +13,8 @@ class SignUpForm extends Component {
             password : '',
             email : '',
             confirmPassword : '',
-            errors : {}
+            errors : {},
+            isLoading:false
         }
 
         this.onChange = this.onChange.bind(this) 
@@ -35,17 +38,29 @@ class SignUpForm extends Component {
     }
 
     onClick() {
-        this.setState({ errors : {} })
-        console.log(this.isValid())
+        this.setState({ errors : {}})
         if (this.isValid()) {
-            console.log('good')
-        } else {
-            console.log('oh no!!!')
+            this.setState({ isLoading : true})
+            this.props.signUp(this.state)
+                .then((res) => {
+                    this.setState({isLoading: false})
+                    if (res.data.success) {
+                        console.log('success')
+                    } else {
+                        this.setState({
+                            errors : Object.assign({}, this.state.erros, res.data.errors)
+                        })
+                    }
+                })
+                .catch((err) => {
+                    console.log(err)
+                    this.setState({isLoading: false})
+                })
         }
     }
 
     render() {
-        const { username, password, email, confirmPassword, errors } = this.state
+        const { username, password, email, confirmPassword, errors, isLoading } = this.state
         return (
             <div className="col-md-4 col-md-offset-4">
                 <h2>SignUp</h2> 
@@ -85,7 +100,7 @@ class SignUpForm extends Component {
                         onChange={this.onChange}
                     /> 
                     <div className="form-group">
-                        <button type="button" className="btn btn-lg btn-primary" onClick={this.onClick}>提交</button>
+                        <button disabled={isLoading} type="button" className="btn btn-lg btn-primary" onClick={this.onClick}>提交</button>
                     </div>
                 </div>
             </div>
@@ -93,4 +108,4 @@ class SignUpForm extends Component {
     }
 }
 
-export default SignUpForm
+export default connect(null, { signUp })(SignUpForm)
