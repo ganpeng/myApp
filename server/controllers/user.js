@@ -33,15 +33,15 @@ export function createUser(req, res) {
 
         const user = yield db.User.create({username, email, password_digist})
 
-        console.log(user.get('id'))
-        console.log(user.get('username'))
-        console.log(user.get('email'))
-
-        // const token = jwt.sign({
-        // }, 'jsonwebtokensecret')
+        const token = jwt.sign({
+            id : user.get('id'),
+            username : user.get('username'),
+            email : user.get('email')
+        }, 'jsonwebtokensecret')
 
         return res.json({
-            success: true
+            success: true,
+            token
         })
 
     })

@@ -1,9 +1,16 @@
 import React, { Component } from 'react'
 
+import LoginForm from '../../components/LoginForm'
+
 class LoginPage extends Component {
     render() {
         return (
-            <h2>LoginPage</h2>
+            <div className="row">
+                <div className="col-md-4 col-md-offset-4">
+                    <h2>Login</h2>
+                    <LoginForm />
+                </div>
+            </div>
         )
     }
 }
