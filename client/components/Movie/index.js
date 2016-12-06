@@ -6,7 +6,6 @@ import { fetchMovie } from '../../actions'
 class Movie extends Component {
     constructor(props) {
         super(props)
-        this.props.fetchMovie()  
     }
     
     render() {
