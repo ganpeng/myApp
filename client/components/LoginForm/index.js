@@ -35,15 +35,12 @@ class LoginForm extends Component {
     }
 
     onClick() {
-        this.setState({errors : {}})
+
         if (this.isValid()) {
-            console.log('success')
-        } else {
-            console.log('failure')
+            this.setState({errors : {}, isLoading: true})
         }
 
     }
-
 
     render() {
         const { identify, password, errors, isLoading } = this.state
@@ -65,7 +62,7 @@ class LoginForm extends Component {
                     type="password"
                 />
                 <div className="form-group">
-                    <button type="button" className="btn btn-lg btn-primary" onClick={this.onClick}>登录</button>
+                    <button disabled={isLoading} type="button" className="btn btn-lg btn-primary" onClick={this.onClick}>登录</button>
                 </div>
             </div>
         )

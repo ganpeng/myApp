@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import jwtDecode from 'jwt-decode'
 
 import InputField from '../InputField'
 import { signUpValidator } from '../../utils/validator'
-import { signUp } from '../../actions/user'
+import { signUp, setCurrentUser } from '../../actions/user'
+import setAuthHeader from '../../utils/setAuthHeader'
 
 class SignUpForm extends Component {
     constructor(props) {
@@ -38,14 +40,18 @@ class SignUpForm extends Component {
     }
 
     onClick() {
-        this.setState({ errors : {}})
         if (this.isValid()) {
-            this.setState({ isLoading : true})
+            this.setState({errors : {}, isLoading : true})
             this.props.signUp(this.state)
                 .then((res) => {
                     this.setState({isLoading: false})
                     if (res.data.success) {
-                        console.log('success')
+                        const token = res.data.token
+                        if (token) {
+                            localStorage.setItem('token', token)
+                            setAuthHeader(token)
+                            this.props.setCurrentUser(jwtDecode(token))
+                        }
                     } else {
                         this.setState({
                             errors : Object.assign({}, this.state.erros, res.data.errors)
@@ -61,6 +67,7 @@ class SignUpForm extends Component {
 
     render() {
         const { username, password, email, confirmPassword, errors, isLoading } = this.state
+
         return (
             <div className="col-md-4 col-md-offset-4">
                 <h2>SignUp</h2> 
@@ -108,4 +115,4 @@ class SignUpForm extends Component {
     }
 }
 
-export default connect(null, { signUp })(SignUpForm)
+export default connect(null, { signUp, setCurrentUser })(SignUpForm)

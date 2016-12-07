@@ -45,15 +45,6 @@ export default (sequelize, DataTypes) => {
         isguy : {
             type : DataTypes.BOOLEAN,
             defaultValue : false
-        },
-
-        isRegister : {
-            type : DataTypes.BOOLEAN,
-            defaultValue : false
-        },
-
-        verifiCode : {
-            type : DataTypes.TEXT
         }
     }, {
         timestamps : true,
