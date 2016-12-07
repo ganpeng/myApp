@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import jwtDecode from 'jwt-decode'
 
 import InputField from '../InputField'
 import { loginValidator } from '../../utils/validator'
+import { login, setCurrentUser } from '../../actions/user'
+import setAuthHeader from '../../utils/setAuthHeader'
 
 class LoginForm extends Component {
     constructor(props) {
@@ -38,6 +42,24 @@ class LoginForm extends Component {
 
         if (this.isValid()) {
             this.setState({errors : {}, isLoading: true})
+            this.props.login(this.state)
+                .then((res) => {
+                    this.setState({isLoading: false})
+                    if (res.data.success) {
+                        const token = res.data.token
+                        localStorage.setItem('token', token) 
+                        setAuthHeader(token)
+                        this.props.setCurrentUser(jwtDecode(token))
+                    } else {
+                        this.setState({
+                            errors : Object.assign({}, this.state.errors, res.data.errors)
+                        })
+                    }
+                })
+                .catch((err) => {
+                    this.setState({isLoading: false})
+                    console.log(err)
+                })
         }
 
     }
@@ -69,4 +91,4 @@ class LoginForm extends Component {
     }
 }
 
-export default LoginForm
+export default connect(null, { login, setCurrentUser })(LoginForm)

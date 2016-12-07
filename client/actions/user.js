@@ -16,3 +16,9 @@ export function setCurrentUser(user) {
         user
     }
 }
+
+export function login(userData) {
+    return dispatch => {
+        return axios.post('/api/auth', userData)
+    }
+}
