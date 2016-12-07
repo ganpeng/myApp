@@ -7,13 +7,15 @@ import About from '../../components/About'
 import SignUpPage from '../SignUpPage'
 import LoginPage from '../LoginPage'
 
+import Authenticate from '../../utils/requireAuth'
+
 class MainSection extends Component {
     render() {
         return (
             <div className="container">
                 <Match exactly pattern="/" component={Home} />
                 <Match pattern="/about" component={About} />
-                <Match pattern="/movie" component={Movie} />
+                <Match pattern="/movie" component={Authenticate(Movie)} />
                 <Match pattern="/signup" component={SignUpPage} />
                 <Match pattern="/login" component={LoginPage} />
             </div>

@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router'
 import { Provider } from 'react-redux'
 import jwtDecode from 'jwt-decode'
 
+
 import App from './containers/App'
 import store from './store'
 import { fetchMovie } from './actions'
