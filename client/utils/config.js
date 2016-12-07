@@ -2,22 +2,22 @@
 export const personCenterList = [
     {
         id : 1,
-        url : '/center/profile',
+        url : '',
         title : '我的资料'
     },
     {
         id : 2,
-        url : '/center/movie',
+        url : '/movie',
         title : '我的电影'
     },
     {
         id : 3,
-        url : '/center/music',
+        url : '/music',
         title : '我的音乐'
     },
     {
         id : 4,
-        url : '/center/mood',
+        url : '/mood',
         title : '我的心情'
     }
 ]
