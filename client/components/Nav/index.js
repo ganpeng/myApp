@@ -21,7 +21,7 @@ class Nav extends Component  {
         const { isAuthorized, user  } = this.props.auth
         const userRender = (
             <ul className="nav navbar-nav navbar-right"> 
-                { user && <li><a href="javascript:;">{ user.email } </a></li> }
+                { user && <li><Link to="/profile">{ user.email } </Link></li> }
                 <li><a href="#" onClick={this.logout.bind(this)} ><span className="glyphicon glyphicon-log-out"></span>登出</a></li> 
             </ul>                 
         )

@@ -6,6 +6,7 @@ import Movie from '../../components/Movie'
 import About from '../../components/About'
 import SignUpPage from '../SignUpPage'
 import LoginPage from '../LoginPage'
+import ProfilePage from '../ProfilePage'
 
 import Authenticate from '../../utils/requireAuth'
 
@@ -18,6 +19,7 @@ class MainSection extends Component {
                 <Match pattern="/movie" component={Authenticate(Movie)} />
                 <Match pattern="/signup" component={SignUpPage} />
                 <Match pattern="/login" component={LoginPage} />
+                <Match pattern="/profile" component={Authenticate(ProfilePage)} />
             </div>
         )
     }
