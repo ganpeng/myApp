@@ -6,6 +6,15 @@ import InputField from '../InputField'
 import { addMovie } from '../../actions/movie'
 import { movieValidator } from '../../utils/validator'
 
+
+const errorMap = {
+    'name' : '电影名不能为空',
+    'desc' : '电影描述不能为空'
+}
+
+
+
+
 class AddMovie extends Component {
     constructor(props) {
         super(props)
@@ -58,9 +67,16 @@ class AddMovie extends Component {
     }
 
     onChange(e) {
-        this.setState({
-            [e.target.name] : e.target.value
-        })
+        let errors = Object.assign({}, this.state.errors)
+        if (e.target.value !== '') {
+            delete errors[e.target.name]
+        } else {
+            errors[e.target.name] = errorMap[e.target.name]
+        }
+            this.setState({
+                [e.target.name] : e.target.value,
+                errors
+            })
     }
 
     render() {
