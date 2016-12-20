@@ -8,7 +8,8 @@ import { _genSalt, _hash } from '../utils/hashPassword'
 
 export function createUser(req, res) {
     co(function* () {
-        const { username, password, email } = req.body
+        console.log(req.body)
+        const { username, password, email, phone, isguy, nickName, gender, birthday, desc, avatar  } = req.body
 
         if (yield db.User.findOne({where : { username }})) {
             return res.json({
@@ -31,7 +32,7 @@ export function createUser(req, res) {
         const salt = yield _genSalt(10)
         const password_digist = yield _hash(password, salt)
 
-        const user = yield db.User.create({username, email, password_digist})
+        const user = yield db.User.create({username, email, password_digist, phone, isguy, nickName, gender, birthday, desc, avatar})
 
         const token = jwt.sign({
             id : user.get('id'),

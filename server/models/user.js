@@ -45,12 +45,20 @@ export default (sequelize, DataTypes) => {
         isguy : {
             type : DataTypes.BOOLEAN,
             defaultValue : false
+        },
+        desc : {
+            type : DataTypes.TEXT,
+            defaultValue : ''
+        },
+        avatar : {
+            type : DataTypes.STRING,
+            default : ''
         }
     }, {
         timestamps : true,
         classMethods : {
             associate : (models) => {
-                User.hasMany(models.Task)
+                User.hasMany(models.Comment)
                 User.hasMany(models.Movie)
             }
         }
