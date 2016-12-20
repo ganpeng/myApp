@@ -5,10 +5,9 @@ import db from '../models/'
 
 export function addMovie(req, res) {
     co(function* () {
-        const { name, desc } = req.body
         const UserId = req.params.userId
 
-        const movie = yield db.Movie.create({ name, desc, UserId })
+        const movie = yield db.Movie.create( Object.assign({}, req.body, { UserId : UserId} ) )
         if (movie) {
             return res.json({
                 success : true,

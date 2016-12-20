@@ -4,6 +4,7 @@
 import user from './user'
 import movie from './movie'
 import auth from './auth'
+import comment from './comment'
 
 import co from 'co'
 import db from '../models'
@@ -13,6 +14,7 @@ export default (app) => {
     app.use('/api/movie', movie)
     app.use('/api/user', user)
     app.use('/api/auth', auth)
+    app.use('/api/comment', comment)
 
     app.post('/api/test', (req, res) => {
 
